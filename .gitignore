@@ -1,0 +1,23 @@
+#node_modules
+node_modules
+
+#dist folder
+dist
+
+#package-lock
+package-lock.json
+
+#environment-files
+.env
+
+#coverage file
+coverage
+
+#packager logs
+yarn-error.log
+
+#packager logs
+yarn.lock
+
+.node-xmlhttprequest*
+

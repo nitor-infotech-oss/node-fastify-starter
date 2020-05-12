@@ -1,0 +1,59 @@
+{
+  "name": "node-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Antara",
+  "license": "ISC",
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "echo 'running tests...' && yarn test:quiet && echo 'lint checking...' && yarn run-lint"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,scss}": [
+      "yarn prettier",
+      "yarn run-lint",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "test": "node --inspect=0.0.0.0:6858 node_modules/jest/bin/jest.js",
+    "build": "mkdir dist && babel ./ -s -d dist",
+    "start:prod": "./dist/bin/www",
+    "start": "nodemon ./bin/dev",
+    "prettier": "prettier \"**/*.{js,css}\" --write",
+    "run-lint": "eslint --fix ."
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
+    "babelify": "^10.0.0",
+    "convict": "^5.2.0",
+    "cross-env": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "fastify": "^2.12.0",
+    "fastify-autoload": "^1.2.2",
+    "fastify-blipp": "^2.1.0",
+    "fastify-cors": "^3.0.2",
+    "fastify-helmet": "^3.0.2",
+    "fastify-http-proxy": "^3.0.0",
+    "fastify-no-icon": "^3.0.0",
+    "fastify-plugin": "^1.6.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "make-promises-safe": "^5.1.0",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.5",
+    "qs": "^6.9.1",
+    "raven": "^2.6.4",
+    "winston": "^3.2.1"
+  }
+}

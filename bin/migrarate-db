@@ -1,0 +1,13 @@
+#!/usr/bin/env node --debug --trace-warnings
+// tslint:disable
+'use_strict'
+
+/**
+ * Module dependencies.
+ */
+require('babel-register')
+require('babel-polyfill')
+
+const migration = require('../dist/database').default
+
+migration()
