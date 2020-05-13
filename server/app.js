@@ -7,7 +7,7 @@ import cors from 'fastify-cors'
 import Raven from './raven'
 import logger from './logger'
 
-export default function NodeServer (fastify, opts, next) {
+export default function NodeServer(fastify, opts, next) {
   fastify.use(Raven.requestHandler())
   fastify.register(cors, {
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -20,14 +20,23 @@ export default function NodeServer (fastify, opts, next) {
     next()
   })
 
-  // This loads all routes and services defined in services folder
+  // This loads all application wide plugins defined in plugins folder
   fastify.register(AutoLoad, {
-    dir: join(__dirname, '../app/services'),
+    dir: join(__dirname, '../app/plugins'),
     includeTypeScript: true,
     options: { ...opts }
   })
 
-  fastify.setErrorHandler(function errorHandler (err, req, reply) {
+  // This loads all routes and services defined in services folder
+  fastify.register(AutoLoad, {
+    dir: join(__dirname, '../app/routes'),
+    includeTypeScript: true,
+    options: { ...opts }
+  })
+
+  fastify.register(require('../app/routes'), { prefix: 'api/v1' });
+
+  fastify.setErrorHandler(function errorHandler(err, req, reply) {
     Raven.errorHandler(err, req)
     reply.status(500).send({
       error: err.stack
@@ -38,7 +47,7 @@ export default function NodeServer (fastify, opts, next) {
 }
 
 NodeServer.options = {
-  querystringParser: str => qs.parse(str),
+  querystringParser: (str) => qs.parse(str),
   logger: { level: 'info' },
   ignoreTrailingSlash: true
 }

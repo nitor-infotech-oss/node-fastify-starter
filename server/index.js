@@ -5,7 +5,6 @@ import 'make-promises-safe'
 import Fastify from 'fastify'
 import nodeServer from './app'
 import config from '../config/app'
-import routes from '../routes'
 
 export default function start () {
   const port = config.get('port')
@@ -13,7 +12,6 @@ export default function start () {
 
   const fastify = Fastify(nodeServer.options)
   fastify.register(nodeServer)
-  routes(fastify)
 
   if (process.env.NODE_ENV !== 'production') {
     const blipp = require('fastify-blipp')
