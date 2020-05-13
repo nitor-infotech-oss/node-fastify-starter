@@ -1,13 +1,17 @@
-//const { ProductService } = require('../../../services/products');
+import userService from '../../services/users/userService'
 
 
 const userRoutes = async app => {
-  //const productService = new ProductService(app);
-  // get all
   app.get('/', async (request, reply) => {
     app.log.info('request.query', request.query);
-    //const products = await productService.getAll({ filter: {} });
-    return 'products';
+    const products = await userService.getAll();
+    return products;
+  });
+
+  app.get('/:id', async (request, reply) => {
+    app.log.info('request.query', request.query);
+    const products = await userService.getUser(request.params.id);
+    return products;
   });
 };
 

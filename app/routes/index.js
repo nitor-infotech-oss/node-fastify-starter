@@ -1,4 +1,4 @@
-const apiRoutes = async (app, options) => {
+const apiRoutes = async app => {
     app.register(require('./users'), { prefix: '/users' });
   };
   
