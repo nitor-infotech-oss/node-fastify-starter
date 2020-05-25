@@ -46,12 +46,30 @@ const getAllUsers = {
 
 const getOneUser = {
   tags,
+  params: {
+    type: 'object',
+    properties: {
+        id: {
+            type: 'string',
+            description: 'user id'
+        }
+    }
+},
   response: {
     200: {
       type: 'object',
       properties: userProperties
     }
-  }
+  },
+  security: [
+    {
+      JWT: {
+      type: 'apiKey',
+      in: 'header',
+      name: 'Authorization',
+      description: ''
+    }}
+  ]
 }
 
 const createOneUser = {
@@ -64,7 +82,16 @@ const createOneUser = {
       type: 'object',
       properties: userProperties
     }
-  }
+  },
+  security: [
+    {
+      JWT: {
+      type: 'apiKey',
+      in: 'header',
+      name: 'Authorization',
+      description: ''
+    }}
+  ]
 }
 
 module.exports = {

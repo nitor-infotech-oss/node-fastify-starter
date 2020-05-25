@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import fastifyPlugin from 'fastify-plugin'
+import config from '../../../config/app'
 
 function verifyToken (server, opts, next) {
   server.decorate('authenticate', (req, res) => {
@@ -10,7 +11,7 @@ function verifyToken (server, opts, next) {
 
     try {
       //if can verify the token, set req.user and pass to next middleware
-      const decoded = jwt.verify(token, 'private-key')
+      const decoded = jwt.verify(token, config.get('secret_key'))
       req.user = decoded
       next()
     } catch (ex) {

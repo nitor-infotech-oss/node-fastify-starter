@@ -13,12 +13,11 @@ const userService = {
   async createUser (user) {
     user.password = bcrypt.hashSync(user.password
       , bcrypt.genSaltSync(8))
-    return await User.save(user)
+    return await User.create(user)
   },
   async loginUser (req) {
     let user = await User.findOne({ where: { email: req.email}})
     if(user) {
-      console.log(user)
       if(bcrypt.compareSync(req.password, user.password)) {
         return user;
       }
