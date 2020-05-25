@@ -27,12 +27,7 @@ export default function NodeServer(fastify, opts, next) {
     options: { ...opts }
   })
 
-  // This loads all routes and services defined in services folder
-  fastify.register(AutoLoad, {
-    dir: join(__dirname, '../app/routes/api'),
-    includeTypeScript: true,
-    options: Object.assign({ prefix: 'api/v1' }, opts)
-  })
+  fastify.register(require('../app/routes/api'), { prefix: 'api/v1' });
 
   fastify.setErrorHandler(function errorHandler(err, req, reply) {
     Raven.errorHandler(err, req)

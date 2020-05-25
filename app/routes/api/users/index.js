@@ -1,5 +1,5 @@
 import userService from '../../../services/users/userService'
-import {getAllUsers, getOneUser} from './type'
+import {getAllUsers, getOneUser, createOneUser} from './type'
 
 const userRoutes = async (app) => {
   app.addHook('preHandler', (request, reply, done) => {
@@ -17,6 +17,12 @@ const userRoutes = async (app) => {
     const user = await userService.getUser(request.params.id)
     return user
   })
+
+  app.post('/', {schema: createOneUser}, async (request, reply) => {
+    const user = await userService.createUser(request.body) 
+    return reply.send(user).code('201')
+  })
+
 }
 
 module.exports = userRoutes

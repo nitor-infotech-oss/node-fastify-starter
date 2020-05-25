@@ -5,7 +5,7 @@ const config = convict({
     name: {
       doc: 'Name of the service',
       format: String,
-      default: 'EHR RPC Server'
+      default: 'Node Boilerplate'
     }
   },
 
@@ -67,7 +67,13 @@ const config = convict({
       default: '',
       env: 'DB_PORT'
     }
-  }
+  },
+  secret_key: {
+    doc: 'App authentication secret key.',
+    format: String,
+    default: 'nutech secret key',
+    env: 'SECRET_KEY'
+  },
 })
 
 config.validate({ allowed: 'strict' })

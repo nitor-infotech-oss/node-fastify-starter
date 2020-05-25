@@ -24,6 +24,14 @@ module.exports = {
     produces: ['application/json'],
     tags: [
       { name: 'User', description: 'User related end-points' }
-    ]
+    ],
+    securityDefinitions: {
+      JWT: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: ''
+      },
+    }
   }
 };

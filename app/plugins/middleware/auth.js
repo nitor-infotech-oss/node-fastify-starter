@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import fastifyPlugin from 'fastify-plugin'
 
-function verifyToken(server, opts, next) {
+function verifyToken (server, opts, next) {
   server.decorate('authenticate', (req, res) => {
     //get the token from the header if present
     const token = req.headers

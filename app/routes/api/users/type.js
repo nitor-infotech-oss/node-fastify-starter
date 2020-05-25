@@ -1,15 +1,22 @@
 const userProperties = {
   id: { type: 'number' },
-  name: { type: 'string' },
+  firstName: { type: 'string' },
   lastName: { type: 'string', nullable: true },
-  gender: {
-    type: 'string',
-    enum: ['M', 'F']
-  },
   email: { type: 'string' },
-  phone: { type: 'number', maximum: 9999999999 },
+  password: { type: 'string' },
+  isActive: { type: 'boolean'},
+  company: { type: 'string'},
   created_at: { type: 'string' },
   updated_at: { type: 'string' }
+}
+
+const createSchema = {
+  firstName: { type: 'string' },
+  lastName: { type: 'string'},
+  email: { type: 'string' },
+  password: { type: 'string' },
+  isActive: { type: 'boolean'},
+  company: { type: 'string'},
 }
 
 const tags = ['User']
@@ -25,7 +32,16 @@ const getAllUsers = {
         properties: userProperties
       }
     }
-  }
+  },
+  security: [
+    {
+      JWT: {
+      type: 'apiKey',
+      in: 'header',
+      name: 'Authorization',
+      description: ''
+    }}
+  ]
 }
 
 const getOneUser = {
@@ -38,7 +54,21 @@ const getOneUser = {
   }
 }
 
+const createOneUser = {
+  tags,
+  body: {
+    properties: createSchema
+  },
+  response: {
+    201: {
+      type: 'object',
+      properties: userProperties
+    }
+  }
+}
+
 module.exports = {
   getAllUsers,
-  getOneUser
+  getOneUser,
+  createOneUser
 }
