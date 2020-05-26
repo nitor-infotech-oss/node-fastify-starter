@@ -9,9 +9,9 @@ function Responder () {}
 function sendResponse (res, status, body) {
   if (!res.headersSent) {
     if (body) {
-      return res.send(body, status)
+      return res.code(status).send(body)
     }
-    return res.send(status)
+    return res.code(status)
   } else {
     logger.error('Response already sent.')
   }
@@ -23,7 +23,7 @@ function sendResponse (res, status, body) {
  */
 Responder.success = (res, message) => {
   message = _.isString(message) ? { message } : message
-  return sendResponse(res, 200, { result: message })
+  return sendResponse(res, 200, message)
 }
 
 Responder.created = (res, object) => {
@@ -35,7 +35,7 @@ Responder.deleted = res => {
 }
 
 Responder.operationFailed = (res, reason) => {
-  const status = reason.status || 400
+  const status =  res.status || 400
   if (reason.name === 'SequelizeUniqueConstraintError') {
     reason = reason.errors.map(er => {
       let errors = {}

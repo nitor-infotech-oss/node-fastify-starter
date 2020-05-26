@@ -29,6 +29,19 @@ const Helper = {
   isValidEmail (email) {
     return /\S+@\S+\.\S+/.test(email)
   },
+
+  generateToken (user) {
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        role: user.role,
+        permissions: user.permission
+      },
+      config.get('secret_key'),
+      { expiresIn: '7d' }
+    )
+    return token
+  }
 }
 
 export default Helper

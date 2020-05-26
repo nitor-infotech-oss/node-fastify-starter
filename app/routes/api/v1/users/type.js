@@ -4,23 +4,22 @@ const userProperties = {
   lastName: { type: 'string', nullable: true },
   email: { type: 'string' },
   password: { type: 'string' },
-  isActive: { type: 'boolean'},
-  company: { type: 'string'},
-  created_at: { type: 'string' },
-  updated_at: { type: 'string' }
+  isActive: { type: 'boolean' },
+  company: { type: 'string' },
+  createdAt: { type: 'string' },
+  updatedAt: { type: 'string' }
 }
 
 const createSchema = {
   firstName: { type: 'string' },
-  lastName: { type: 'string'},
+  lastName: { type: 'string' },
   email: { type: 'string' },
   password: { type: 'string' },
-  isActive: { type: 'boolean'},
-  company: { type: 'string'},
+  isActive: { type: 'boolean' },
+  company: { type: 'string' }
 }
 
 const tags = ['User']
-
 
 const getAllUsers = {
   tags,
@@ -36,11 +35,12 @@ const getAllUsers = {
   security: [
     {
       JWT: {
-      type: 'apiKey',
-      in: 'header',
-      name: 'Authorization',
-      description: ''
-    }}
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: ''
+      }
+    }
   ]
 }
 
@@ -49,12 +49,12 @@ const getOneUser = {
   params: {
     type: 'object',
     properties: {
-        id: {
-            type: 'string',
-            description: 'user id'
-        }
+      id: {
+        type: 'string',
+        description: 'user id'
+      }
     }
-},
+  },
   response: {
     200: {
       type: 'object',
@@ -64,11 +64,12 @@ const getOneUser = {
   security: [
     {
       JWT: {
-      type: 'apiKey',
-      in: 'header',
-      name: 'Authorization',
-      description: ''
-    }}
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: ''
+      }
+    }
   ]
 }
 
@@ -86,11 +87,12 @@ const createOneUser = {
   security: [
     {
       JWT: {
-      type: 'apiKey',
-      in: 'header',
-      name: 'Authorization',
-      description: ''
-    }}
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: ''
+      }
+    }
   ]
 }
 
