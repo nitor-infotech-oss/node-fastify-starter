@@ -1,4 +1,4 @@
-import userService from '../../../services/users/userService'
+import userService from '../../../../services/users/userService'
 import { LoginUser } from './type'
 
 const authenticationRoutes = async (app) => {

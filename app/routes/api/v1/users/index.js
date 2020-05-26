@@ -1,4 +1,4 @@
-import userService from '../../../services/users/userService'
+import userService from '../../../../services/users/userService'
 import {getAllUsers, getOneUser, createOneUser} from './type'
 
 const userRoutes = async (app) => {
