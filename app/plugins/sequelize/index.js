@@ -25,10 +25,10 @@ function sequelizeDB(fastify, options, next) {
   sequelize
     .authenticate()
     .then(() => {
-      console.log('Connection has been established successfully.')
+      fastify.log.info('Connection has been established successfully.')
     })
     .catch((err) => {
-      console.error('Unable to connect to the database:', err)
+      fastify.log.info('Unable to connect to the database:', err)
     })
 
   fastify.decorate('sequelize', sequelize)
